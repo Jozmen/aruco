@@ -264,7 +264,6 @@ void IPPE::PoseSolver::solveCanonicalForm(cv::InputArray _canonicalObjPoints, cv
 void IPPE::PoseSolver::solveSquare(float squareLength, InputArray _imagePoints, InputArray _cameraMatrix, InputArray _distCoeffs,
                                    OutputArray _rvec1, OutputArray _tvec1, float& err1, OutputArray _rvec2, OutputArray _tvec2, float& err2)
 {
-
     //allocate outputs:
     _rvec1.create(3, 1, CV_64FC1);
     _tvec1.create(3, 1, CV_64FC1);
@@ -291,6 +290,7 @@ void IPPE::PoseSolver::solveSquare(float squareLength, InputArray _imagePoints, 
     }
 
     //compute H
+    normalizedInputPoints.convertTo(normalizedInputPoints, CV_64FC2);
     homographyFromSquarePoints(normalizedInputPoints, squareLength / 2.0f, H);
 
     //now solve
@@ -747,6 +747,7 @@ void IPPE::PoseSolver::evalReprojError(cv::InputArray _objectPoints, cv::InputAr
 {
     cv::Mat projectedPoints;
     cv::Mat imagePoints = _imagePoints.getMat();
+    imagePoints.convertTo(imagePoints, CV_64FC1);
     cv::Mat r;
     rot2vec(_M.getMat().colRange(0, 3).rowRange(0, 3), r);
 
