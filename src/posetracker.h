@@ -104,6 +104,9 @@ namespace aruco
     {
     public:
         MarkerMapPoseTracker();
+
+        MarkerMapPoseTracker(const CameraParameters& cam_params, const MarkerMap& msconf,
+                             float markerSize = -1);
         // Sets the parameters required for operation
         // If the msconf has data expressed in meters, then the markerSize parameter is not required. If it is in
         // pixels, the markersize will be used to

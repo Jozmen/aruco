@@ -376,6 +376,12 @@ inline double getHubberMonoWeight(double SqErr,double Information){
         aruco_minerrratio_valid=3;
     }
 
+	MarkerMapPoseTracker::MarkerMapPoseTracker(const CameraParameters &cam_params, const MarkerMap &msconf, float markerSize) :
+		MarkerMapPoseTracker()
+	{
+		this->setParams(cam_params, msconf, markerSize);
+	}
+
     void MarkerMapPoseTracker::setParams(const CameraParameters& cam_params, const MarkerMap& msconf,
                                          float markerSize)
     {
